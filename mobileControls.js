@@ -3,22 +3,22 @@ right = document.querySelector(".rightBtn");
 topBtn = document.querySelector(".upBtn");
 action = document.querySelector(".actionBtn");
 
-left.addEventListener("mousedown", (e) => {
+left.addEventListener("touchstart", (e) => {
   keyPressed.a = true;
   left.style.opacity = "10";
 });
 
-left.addEventListener("mouseup", (e) => {
+left.addEventListener("touchend", (e) => {
   keyPressed.a = false;
   left.style.opacity = "0.6";
 });
 
-right.addEventListener("mousedown", (e) => {
+right.addEventListener("touchstart", (e) => {
   keyPressed.d = true;
   right.style.opacity = "10";
 });
 
-right.addEventListener("mouseup", (e) => {
+right.addEventListener("touchend", (e) => {
   keyPressed.d = false;
   right.style.opacity = "0.6";
 });
