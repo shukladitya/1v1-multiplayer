@@ -1,6 +1,7 @@
 canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 4;
+
 document.querySelector(".healthBars").width = window.innerWidth - 5;
 document.querySelector(".message").width = window.innerWidth - 5;
 gameTimer = document.querySelector(".timer");
@@ -239,7 +240,7 @@ class Human {
 }
 
 let player = new Human(300, 0, 1, "r");
-let enemy = new Human(900, 20, 3, "l");
+let enemy = new Human(900, 20, 2, "l");
 let background = new Sprite(
   `./assets/background${random}.png`,
   0,
