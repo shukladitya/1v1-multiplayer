@@ -1,9 +1,9 @@
 canvas = document.querySelector("canvas");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 4;
 
 document.querySelector(".healthBars").width = window.innerWidth - 5;
+document.querySelector(".controlls").width = window.innerWidth - 5;
 document.querySelector(".message").width = window.innerWidth - 5;
 gameTimer = document.querySelector(".timer");
 
@@ -87,14 +87,14 @@ class Human {
     this.locationX = locationX;
     this.locationY = locationY;
     this.velocityY = 0; //initial velocity freefall
-    this.width = 200;
-    this.height = 250;
+    this.width = innerHeight / 3;
+    this.height = innerHeight / 2.7;
     this.attackBoxX = this.locationX;
     this.attackBoxY = this.locationY;
-    this.attackBoxWidth = 410;
-    this.attackBoxHeight = 90;
+    this.attackBoxWidth = innerHeight / 1.55;
+    this.attackBoxHeight = innerHeight / 6.5;
     this.applyAttackInset = false;
-    this.attackInset = 210;
+    this.attackInset = (innerHeight * 6.3) / 20;
     this.health = 100;
     this.isDead = false;
     //
@@ -127,7 +127,7 @@ class Human {
 
   draw = () => {
     // .....bodybox below......
-    // c.fillRect(this.locationX, this.locationY, this.width, this.height);
+    c.fillRect(this.locationX, this.locationY, this.width, this.height);
     c.drawImage(
       this.image,
       (this.currentFrameNumber % this.frames) *
@@ -135,9 +135,9 @@ class Human {
       0,
       this.image.width / this.frames,
       this.image.height,
-      this.locationX - 600,
-      this.locationY - 500,
-      this.width * this.scale + 400,
+      this.locationX - innerHeight,
+      this.locationY - innerHeight * (4.5 / 6),
+      this.width * this.scale + (4 * innerHeight) / 6,
       this.height * this.scale
     );
 
@@ -165,9 +165,9 @@ class Human {
 
   updatePosition = (movementX) => {
     this.locationY += this.velocityY;
-    if (this.locationY + 150 + this.velocityY >= canvas.height - 170) {
+    if (this.locationY + this.velocityY >= canvas.height - innerHeight * 0.5) {
       this.velocityY = 0;
-      this.locationY = canvas.height - 320;
+      this.locationY = canvas.height - innerHeight * 0.5;
       this.updateSpritePosture(this.spriteDirection, "idle");
     } else {
       this.velocityY += gravity;
@@ -191,7 +191,7 @@ class Human {
   };
 
   jump = () => {
-    this.velocityY = -20;
+    this.velocityY = -0.03 * innerHeight;
   };
 
   attacking = () => {
@@ -240,8 +240,8 @@ class Human {
   };
 }
 
-let player = new Human(300, 0, 1, "r");
-let enemy = new Human(900, 20, 2, "l");
+let player = new Human(innerWidth / 5, 0, 1, "r");
+let enemy = new Human(innerWidth * (2 / 3), innerHeight / 15, 2, "l");
 let background = new Sprite(
   `./assets/background${random}.png`,
   0,

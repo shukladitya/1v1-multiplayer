@@ -23,7 +23,7 @@ right.addEventListener("touchend", (e) => {
   right.style.opacity = "0.6";
 });
 
-topBtn.addEventListener("mousedown", (e) => {
+topBtn.addEventListener("touchstart", (e) => {
   if (!player.isDead) player.jump();
   topBtn.style.opacity = "10";
   setTimeout(() => {
@@ -31,7 +31,7 @@ topBtn.addEventListener("mousedown", (e) => {
   }, 100);
 });
 
-action.addEventListener("mousedown", (e) => {
+action.addEventListener("touchstart", (e) => {
   if (!player.isDead) player.attacking();
   action.style.opacity = "10";
   setTimeout(() => {
