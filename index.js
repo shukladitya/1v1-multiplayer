@@ -127,7 +127,7 @@ class Human {
 
   draw = () => {
     // .....bodybox below......
-    c.fillRect(this.locationX, this.locationY, this.width, this.height);
+    //c.fillRect(this.locationX, this.locationY, this.width, this.height);
     c.drawImage(
       this.image,
       (this.currentFrameNumber % this.frames) *

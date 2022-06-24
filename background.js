@@ -1,4 +1,4 @@
-  class Sprite {
+class Sprite {
     constructor(src, positionX, positionY, frames) {
       this.positionX = positionX;
       this.positionY = positionY;
