@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <script src="http://localhost:3500/socket.io/socket.io.js"></script>
+    <title>1V1 Fighting</title>
   </head>
   <body>
     <style>
@@ -105,6 +105,161 @@
       .actionBtn {
         font-size: 4rem;
       }
+
+      /* menu------ */
+
+      .menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        color: white;
+      }
+      .menuScaffold {
+        background-color: #810955;
+        padding: 2% 8%;
+        border-radius: 1rem;
+      }
+      .name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+      }
+      .name span {
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-left: 2rem;
+      }
+      .imageHolder {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 1rem;
+      }
+      .playerImage {
+        width: 15vh;
+        height: 15vh;
+        border-radius: 1rem;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .p1 {
+        background-image: url("./assets/menu/p1.JPG");
+        border: 1rem solid #ce1d39;
+      }
+      .p2 {
+        background-image: url("./assets/menu/p2.JPG");
+      }
+      .p3 {
+        background-image: url("./assets/menu/p3.JPG");
+      }
+      .linkShare {
+        margin: 2rem 0 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+      .linkShare > p {
+        color: black;
+      }
+      .linkShare > div {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1rem 0rem;
+        border: 2px solid #ce1d39;
+        padding: 0.5rem 2rem;
+        border-radius: 2rem;
+      }
+      .linkShare > div > span {
+        font-size: 2rem;
+        margin: 0rem 1rem;
+      }
+      .startBtn {
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+
+      .startBtn > div {
+        background-color: #ce1d39;
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        cursor: pointer;
+      }
+      .startBtnHover:hover {
+        transform: scale(1.15);
+        transition: all 0.2s;
+      }
+
+      .highScoreAndInfo {
+        display: flex;
+        justify-content: space-between;
+        font-size: 2rem;
+      }
+      .trophy {
+        cursor: pointer;
+      }
+      .info {
+        cursor: pointer;
+      }
+
+      /* change Name------- */
+      .changeName {
+        background-color: #810955;
+        padding: 4rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 1rem;
+        display: none;
+      }
+      .changeName p {
+        margin-bottom: 2rem;
+      }
+      .newName {
+        height: 2rem;
+        background-color: #4a0531;
+        border: none;
+        color: white;
+        border-radius: 2rem;
+        padding: 1.5rem 2rem;
+      }
+      .newName:focus,
+      .newName:focus {
+        outline: none;
+      }
+      .renameField {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .reloadName {
+        font-size: 2.5rem;
+        margin-left: 2rem;
+        cursor: pointer;
+      }
+      .submitBtn {
+        margin-top: 2rem;
+        background-color: #ce1d39;
+        padding: 1rem 3rem;
+        border-radius: 2rem;
+        cursor: pointer;
+      }
     </style>
     <div class="scaffold">
       <div class="healthBars">
@@ -132,6 +287,49 @@
           <ion-icon class="actionBtn btn" name="flash-outline"></ion-icon>
         </div>
       </div>
+
+      <!-- menu----------->
+      <div class="menu">
+        <div class="menuScaffold">
+          <div class="name">
+            <p>Your name: GenricName</p>
+            <span class="changeNameBtn"
+              ><ion-icon name="create-sharp"></ion-icon
+            ></span>
+          </div>
+          <div class="imageHolder">
+            <div class="playerImage p1" name="p1">P1</div>
+            <div class="playerImage p2" name="p2"></div>
+            <div class="playerImage p3" name="p3"></div>
+          </div>
+          <div class="linkShare">
+            <p>Share this link for online match</p>
+            <div>
+              <p>http://thisisthelink/asdasd</p>
+              <span><ion-icon name="link-outline"></ion-icon></span>
+              <span><ion-icon name="logo-whatsapp"></ion-icon></span>
+            </div>
+          </div>
+          <div class="startBtn">
+            <div class="startBtnHover">START FIGHT</div>
+          </div>
+
+          <div class="highScoreAndInfo">
+            <ion-icon name="trophy-sharp" class="trophy"></ion-icon>
+            <ion-icon name="information-circle-sharp" class="info"></ion-icon>
+          </div>
+        </div>
+        <div class="changeName">
+          <p>New Username</p>
+          <div class="renameField">
+            <input type="text" class="newName" /><ion-icon
+              name="refresh-circle-sharp"
+              class="reloadName"
+            ></ion-icon>
+          </div>
+          <div class="submitBtn">Submit</div>
+        </div>
+      </div>
     </div>
     <script
       type="module"
@@ -150,5 +348,8 @@
     <script src="background.js"></script>
     <script src="index.js"></script>
     <script src="mobileControls.js"></script>
+    <script src="networking.js"></script>
+    <script src="menuName.js"></script>
+    <script src="menu.js"></script>
   </body>
 </html>

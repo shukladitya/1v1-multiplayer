@@ -1,6 +1,6 @@
 canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 4;
+canvas.height = window.innerHeight;
 
 document.querySelector(".healthBars").width = window.innerWidth - 5;
 document.querySelector(".controlls").width = window.innerWidth - 5;
