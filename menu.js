@@ -37,6 +37,10 @@ document.querySelector(".submitBtn").addEventListener("click", () => {
 
 document.querySelector(".startBtnHover").addEventListener("click", () => {
   document.querySelector(".menu").style.display = "none";
+  if (youAre == "accepter") {
+    socket.emit("accepterStarted", player.spriteNumber);
+  }
+  restart(player.spriteNumber, enemy.spriteNumber);
   animate();
 });
 
@@ -84,7 +88,10 @@ const urlParams = new URLSearchParams(queryString);
 roomCode = urlParams.get("roomCode");
 roomFull = urlParams.get("roomFull");
 if (roomCode != null && roomFull == "false") {
-  youAre = "accepter";
+  {
+    youAre = "accepter";
+    acceptersName = roomCode;
+  }
 
   linkShare = document.querySelector(".linkShare");
   linkShare.innerHTML = `<div>Accepted challenge from&nbsp<b>${roomCode}</b></div>`;

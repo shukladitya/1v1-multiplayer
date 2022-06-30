@@ -279,6 +279,29 @@
         transform: translateY(5rem);
         transition: all 0.3s;
       }
+      .restartBtn {
+        display: none;
+        position: absolute;
+        bottom: 3rem;
+        left: 3rem;
+        right: 3rem;
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+      }
+      .restartBtn p {
+        display: inline-flex;
+        background-color: #ce1d39;
+        color: white;
+        padding: 1rem 3rem;
+        border-radius: 5rem;
+        justify-content: center;
+        align-items: center;
+      }
+      .restartBtn ion-icon {
+        font-size: 2rem;
+        margin-left: 2rem;
+      }
     </style>
     <div class="scaffold">
       <div class="healthBars">
@@ -356,6 +379,9 @@
       </div>
       <div class="notification">
         <p></p>
+      </div>
+      <div class="restartBtn">
+        <p>Restart <ion-icon name="refresh"></ion-icon></p>
       </div>
       <div hidden>
         <img src="assets/player1l/attack1.png" alt="" srcset="" />

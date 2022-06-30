@@ -257,6 +257,19 @@ restart = (playerSprite, enemySprite) => {
   enemy.locationX = innerWidth * (2 / 3);
   enemy.locationY = innerHeight / 15;
   enemy.spriteNumber = enemySprite;
+
+  player.isDead = false;
+  enemy.isDead = false;
+  player.health = 100;
+  enemy.health = 100;
+  gsap.to(".enemyHealth>div", { width: `${enemy.health}%` });
+  gsap.to(".playerHealth>div", { width: `${player.health}%` });
+  player.framesInDeath = numberOfFramesInSprites[player.spriteNumber]["death"];
+  enemy.framesInDeath = numberOfFramesInSprites[enemy.spriteNumber]["death"];
+  time = 60;
+  setMessage("");
+  clearTimeout(a);
+  timer();
 };
 
 let animate = () => {
@@ -323,12 +336,14 @@ let animate = () => {
   if (player.health == 0) {
     player.initiateDeath();
     clearTimeout(a);
-    setMessage("Player 2 won.");
+    setMessage(`${acceptersName} Won.`);
+    restartBtn.style.display = "block";
   }
   if (enemy.health == 0) {
     enemy.initiateDeath();
     clearTimeout(a);
-    setMessage("Player 1 won.");
+    setMessage(`${userName} Won.`);
+    restartBtn.style.display = "block";
   }
 };
 
@@ -363,6 +378,7 @@ let timer = () => {
       if (enemy.health < player.health) setMessage("Player 1 won.");
       else if (enemy.health > player.health) setMessage("player 2 won.");
       else setMessage("tie");
+      restartBtn.style.display = "block";
     }
   }, 1000);
 };
@@ -373,3 +389,11 @@ let setMessage = (messageString) => {
 };
 
 timer();
+
+///restart button
+restartBtn = document.querySelector(".restartBtn");
+restartBtn.addEventListener("click", () => {
+  restart(player.spriteNumber, enemy.spriteNumber);
+  restartBtn.style.display = "none";
+  socket.emit("gameRestarted");
+});

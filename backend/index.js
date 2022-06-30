@@ -44,9 +44,25 @@ io.on("connection", (socket) => {
     roomDetails[joinRoom.id] = { accepterName: joinRoom.accepterName };
     socket.to(joinRoom.id).emit("challengeAccepted", joinRoom.accepterName);
   });
+  socket.on("joinRoom", (joinRoom) => {
+    console.log("joiningRoom: " + joinRoom.id);
+    socket.join(joinRoom.id);
+    roomDetails[joinRoom.id] = { accepterName: joinRoom.accepterName };
+    socket.to(joinRoom.id).emit("challengeAccepted", joinRoom.accepterName);
+  });
   socket.on("movement", (movement) => {
     socket.rooms.forEach((room) => {
       socket.to(room).emit("movement", movement);
+    });
+  });
+  socket.on("accepterStarted", (accepterSprite) => {
+    socket.rooms.forEach((room) => {
+      socket.to(room).emit("accepterStarted", accepterSprite);
+    });
+  });
+  socket.on("gameRestarted", () => {
+    socket.rooms.forEach((room) => {
+      socket.to(room).emit("gameRestarted");
     });
   });
 });

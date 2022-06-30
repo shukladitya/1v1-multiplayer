@@ -16,9 +16,19 @@ socket.on("connected", (data) => {
   else socket.emit("joinRoom", { id: roomCode, accepterName: userName });
 });
 
+acceptersName = "player 2";
 socket.on("challengeAccepted", (accepterName) => {
   youAre = "challenger";
   addNotification(`${accepterName} joined the match.`);
+  acceptersName = accepterName;
+});
+
+socket.on("accepterStarted", (accepterSprite) => {
+  restart(player.spriteNumber, accepterSprite);
+});
+socket.on("gameRestarted", () => {
+  restart(player.spriteNumber, enemy.spriteNumber);
+  restartBtn.style.display = "none";
 });
 
 socket.on("movement", (movementInfo) => {
