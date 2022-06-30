@@ -79,7 +79,7 @@
         position: absolute;
         width: 100%;
         bottom: 0;
-        display: flex;
+        display: none;
         justify-content: space-between;
         align-items: baseline;
         padding: 2%;
@@ -156,7 +156,6 @@
       }
       .p1 {
         background-image: url("./assets/menu/p1.JPG");
-        border: 1rem solid #ce1d39;
       }
       .p2 {
         background-image: url("./assets/menu/p2.JPG");
@@ -233,7 +232,7 @@
       }
       .newName {
         height: 2rem;
-        background-color: #4a0531;
+        background-color: #571d42;
         border: none;
         color: white;
         border-radius: 2rem;
@@ -259,6 +258,26 @@
         padding: 1rem 3rem;
         border-radius: 2rem;
         cursor: pointer;
+      }
+      .notification {
+        position: absolute;
+        top: 2rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+        transform: translateY(-5rem);
+        transition: all 0.3s;
+      }
+      .notification p {
+        display: inline-block;
+        padding: 1rem 3rem;
+        background-color: #ce1d39;
+        color: white;
+        border-radius: 2rem;
+      }
+      .moveNotification {
+        transform: translateY(5rem);
+        transition: all 0.3s;
       }
     </style>
     <div class="scaffold">
@@ -298,16 +317,21 @@
             ></span>
           </div>
           <div class="imageHolder">
-            <div class="playerImage p1" name="p1">P1</div>
+            <div class="playerImage p1" name="p1"></div>
             <div class="playerImage p2" name="p2"></div>
             <div class="playerImage p3" name="p3"></div>
           </div>
           <div class="linkShare">
             <p>Share this link for online match</p>
             <div>
-              <p>http://thisisthelink/asdasd</p>
-              <span><ion-icon name="link-outline"></ion-icon></span>
-              <span><ion-icon name="logo-whatsapp"></ion-icon></span>
+              <p class="link">http://thisisthelink/asdasd</p>
+              <span
+                ><ion-icon class="linkCopy" name="link-outline"></ion-icon
+              ></span>
+
+              <span
+                ><ion-icon class="whatsappBtn" name="logo-whatsapp"></ion-icon
+              ></span>
             </div>
           </div>
           <div class="startBtn">
@@ -329,6 +353,70 @@
           </div>
           <div class="submitBtn">Submit</div>
         </div>
+      </div>
+      <div class="notification">
+        <p></p>
+      </div>
+      <div hidden>
+        <img src="assets/player1l/attack1.png" alt="" srcset="" />
+        <img src="assets/player1l/attack2.png" alt="" srcset="" />
+        <img src="assets/player1l/death.png" alt="" srcset="" />
+        <img src="assets/player1l/fall.png" alt="" srcset="" />
+        <img src="assets/player1l/idle.png" alt="" srcset="" />
+        <img src="assets/player1l/jump.png" alt="" srcset="" />
+        <img src="assets/player1l/run.png" alt="" srcset="" />
+        <img src="assets/player1l/tHit1.png" alt="" srcset="" />
+        <img src="assets/player1l/tHit2.png" alt="" srcset="" />
+
+        <img src="assets/player1r/attack1.png" alt="" srcset="" />
+        <img src="assets/player1r/attack2.png" alt="" srcset="" />
+        <img src="assets/player1r/death.png" alt="" srcset="" />
+        <img src="assets/player1r/fall.png" alt="" srcset="" />
+        <img src="assets/player1r/idle.png" alt="" srcset="" />
+        <img src="assets/player1r/jump.png" alt="" srcset="" />
+        <img src="assets/player1r/run.png" alt="" srcset="" />
+        <img src="assets/player1r/tHit1.png" alt="" srcset="" />
+        <img src="assets/player1r/tHit2.png" alt="" srcset="" />
+
+        <img src="assets/player2l/attack1.png" alt="" srcset="" />
+        <img src="assets/player2l/attack2.png" alt="" srcset="" />
+        <img src="assets/player2l/death.png" alt="" srcset="" />
+        <img src="assets/player2l/fall.png" alt="" srcset="" />
+        <img src="assets/player2l/idle.png" alt="" srcset="" />
+        <img src="assets/player2l/jump.png" alt="" srcset="" />
+        <img src="assets/player2l/run.png" alt="" srcset="" />
+        <img src="assets/player2l/tHit1.png" alt="" srcset="" />
+        <img src="assets/player2l/tHit2.png" alt="" srcset="" />
+
+        <img src="assets/player2r/attack1.png" alt="" srcset="" />
+        <img src="assets/player2r/attack2.png" alt="" srcset="" />
+        <img src="assets/player2r/death.png" alt="" srcset="" />
+        <img src="assets/player2r/fall.png" alt="" srcset="" />
+        <img src="assets/player2r/idle.png" alt="" srcset="" />
+        <img src="assets/player2r/jump.png" alt="" srcset="" />
+        <img src="assets/player2r/run.png" alt="" srcset="" />
+        <img src="assets/player2r/tHit1.png" alt="" srcset="" />
+        <img src="assets/player2r/tHit2.png" alt="" srcset="" />
+
+        <img src="assets/player3l/attack1.png" alt="" srcset="" />
+        <img src="assets/player3l/attack2.png" alt="" srcset="" />
+        <img src="assets/player3l/death.png" alt="" srcset="" />
+        <img src="assets/player3l/fall.png" alt="" srcset="" />
+        <img src="assets/player3l/idle.png" alt="" srcset="" />
+        <img src="assets/player3l/jump.png" alt="" srcset="" />
+        <img src="assets/player3l/run.png" alt="" srcset="" />
+        <img src="assets/player3l/tHit1.png" alt="" srcset="" />
+        <img src="assets/player3l/tHit2.png" alt="" srcset="" />
+
+        <img src="assets/player3r/attack1.png" alt="" srcset="" />
+        <img src="assets/player3r/attack2.png" alt="" srcset="" />
+        <img src="assets/player3r/death.png" alt="" srcset="" />
+        <img src="assets/player3r/fall.png" alt="" srcset="" />
+        <img src="assets/player3r/idle.png" alt="" srcset="" />
+        <img src="assets/player3r/jump.png" alt="" srcset="" />
+        <img src="assets/player3r/run.png" alt="" srcset="" />
+        <img src="assets/player3r/tHit1.png" alt="" srcset="" />
+        <img src="assets/player3r/tHit2.png" alt="" srcset="" />
       </div>
     </div>
     <script

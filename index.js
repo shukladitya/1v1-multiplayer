@@ -1,13 +1,8 @@
-canvas = document.querySelector("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 document.querySelector(".healthBars").width = window.innerWidth - 5;
 document.querySelector(".controlls").width = window.innerWidth - 5;
 document.querySelector(".message").width = window.innerWidth - 5;
 gameTimer = document.querySelector(".timer");
 
-let backgroundFramesArray = [0, 8, 36, 8, 4, 8, 40, 38, 24, 51, 131];
 let numberOfFramesInSprites = [
   {},
   {
@@ -44,14 +39,9 @@ let numberOfFramesInSprites = [
     tHit2: 4,
   },
 ];
-let random = Math.floor(Math.random() * 10) + 1;
 
 let gravity = 0.5;
 let time = 60;
-
-c = canvas.getContext("2d");
-c.fillStyle = "black";
-c.fillRect(0, 0, canvas.width, canvas.height);
 
 keyPressed = {
   a: false,
@@ -62,16 +52,23 @@ keyPressed = {
   keyUp: false,
 };
 
+youAre = "offline"; //challenger(updated in network.js) OR accepter(updated in menu.js)
+
 addEventListener("keydown", (e) => {
   if (e.key == "a") keyPressed.a = true;
   if (e.key == "d") keyPressed.d = true;
   if (e.key == "w" && !player.isDead) player.jump();
   if (e.key == " " && !player.isDead) player.attacking();
 
-  if (e.key == "ArrowRight") keyPressed.keyRight = true;
-  if (e.key == "ArrowLeft") keyPressed.keyLeft = true;
-  if (e.key == "ArrowUp" && !enemy.isDead) enemy.jump();
-  if (e.key == "ArrowDown" && !enemy.isDead) enemy.attacking();
+  if (youAre != "challenger" && youAre != "accepter") {
+    if (e.key == "ArrowRight") keyPressed.keyRight = true;
+    if (e.key == "ArrowLeft") keyPressed.keyLeft = true;
+    if (e.key == "ArrowUp" && !enemy.isDead) enemy.jump();
+    if (e.key == "ArrowDown" && !enemy.isDead) enemy.attacking();
+  }
+  if (youAre == "challenger" || youAre == "accepter") {
+    doNetworkMovement("keydown", e.key, youAre);
+  }
 });
 addEventListener("keyup", (e) => {
   if (e.key == "a") keyPressed.a = false;
@@ -80,6 +77,10 @@ addEventListener("keyup", (e) => {
   if (e.key == "ArrowRight") keyPressed.keyRight = false;
   if (e.key == "ArrowLeft") keyPressed.keyLeft = false;
   if (e.key == "ArrowUp") keyPressed.keyLeft = false;
+
+  if (youAre == "challenger" || youAre == "accepter") {
+    doNetworkMovement("keyup", e.key, youAre);
+  }
 });
 
 class Human {
@@ -239,21 +240,27 @@ class Human {
     this.draw();
   };
 }
+playerSprite = localStorage.getItem("playerNumber") || 1;
+enemySprite = Math.floor(Math.random() * 2) + 2;
 
-let player = new Human(innerWidth / 5, 0, 1, "r");
-let enemy = new Human(innerWidth * (2 / 3), innerHeight / 15, 2, "l");
-let background = new Sprite(
-  `./assets/background${random}.png`,
-  0,
-  0,
-  backgroundFramesArray[random]
-);
+player = new Human(innerWidth / 5, 0, playerSprite, "r");
+enemy = new Human(innerWidth * (2 / 3), innerHeight / 15, enemySprite, "l");
+if (enemySprite == playerSprite) {
+  enemy.spriteNumber = ((enemy.spriteNumber + 1) % 3) + 1;
+}
+
+restart = (playerSprite, enemySprite) => {
+  player.locationX = innerWidth / 5;
+  player.locationY = 0;
+  player.spriteNumber = playerSprite;
+  //
+  enemy.locationX = innerWidth * (2 / 3);
+  enemy.locationY = innerHeight / 15;
+  enemy.spriteNumber = enemySprite;
+};
 
 let animate = () => {
   requestAnimationFrame(animate);
-  c.fillStyle = "black";
-  c.fillRect(0, 0, canvas.width, canvas.height);
-  background.updateFrames();
 
   ///update position in x axis
   if (keyPressed.a && !player.isDead) {
@@ -324,7 +331,7 @@ let animate = () => {
     setMessage("Player 1 won.");
   }
 };
-animate();
+
 ///
 //
 //
