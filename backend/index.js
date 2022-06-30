@@ -22,7 +22,7 @@ app.get("/:roomCode", function (req, res) {
     roomFull,
     // valid: "your string here",
   });
-  res.redirect("https://challenge-1v1.herokuapp.com/?" + query);
+  res.redirect("https://shukladitya.github.io/1v1-multiplayer/?" + query);
 });
 
 let roomDetails = {};
