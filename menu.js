@@ -1,3 +1,8 @@
+//meta tags
+// titleMeta = document.querySelector("#titleMeta");
+// descriptionMeta = document.querySelector("#descriptionMeta");
+// imageMeta = document.querySelector("#imageMeta");
+//meta tags
 namePara = document.querySelector(".name p");
 
 if (!localStorage.getItem("username")) {
@@ -24,9 +29,11 @@ document.querySelector(".reloadName").addEventListener("click", () => {
 });
 
 document.querySelector(".newName").addEventListener("keyup", (e) => {
-  namePara.innerText = `Your name: ${e.target.value}`;
-  localStorage.setItem("username", e.target.value);
-  link.innerText = `${host}/${e.target.value}`;
+  writtenNameArray = e.target.value.split(" ");
+  writtenName = writtenNameArray.join("_");
+  namePara.innerText = `Your name: ${writtenName}`;
+  localStorage.setItem("username", writtenName);
+  link.innerText = `${host}/${writtenName}`;
 });
 
 document.querySelector(".submitBtn").addEventListener("click", () => {
