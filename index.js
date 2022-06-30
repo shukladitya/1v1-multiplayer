@@ -272,18 +272,21 @@ restart = (playerSprite, enemySprite) => {
   timer();
 };
 
+toMoveUnits = innerWidth / 150;
+
 let animate = () => {
   requestAnimationFrame(animate);
 
   ///update position in x axis
   if (keyPressed.a && !player.isDead) {
-    player.updatePosition(-5);
-  } else if (keyPressed.d && !player.isDead) player.updatePosition(5);
+    player.updatePosition(-toMoveUnits);
+  } else if (keyPressed.d && !player.isDead) player.updatePosition(toMoveUnits);
   else player.updatePosition(0);
 
   if (keyPressed.keyLeft && !enemy.isDead) {
-    enemy.updatePosition(-5);
-  } else if (keyPressed.keyRight && !enemy.isDead) enemy.updatePosition(5);
+    enemy.updatePosition(-toMoveUnits);
+  } else if (keyPressed.keyRight && !enemy.isDead)
+    enemy.updatePosition(toMoveUnits);
   else enemy.updatePosition(0);
 
   ///
