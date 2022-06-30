@@ -40,6 +40,7 @@ document.querySelector(".startBtnHover").addEventListener("click", () => {
   if (youAre == "accepter") {
     socket.emit("accepterStarted", player.spriteNumber);
   }
+  timer();
   restart(player.spriteNumber, enemy.spriteNumber);
   animate();
 });
@@ -68,7 +69,7 @@ availabeFighters.forEach((element) => {
 });
 
 //creating the shareable link
-host = "http://localhost:3500";
+host = "https://challenge-1v1.herokuapp.com";
 link = document.querySelector(".link");
 link.innerText = `${host}/${userName}`;
 //creating copy btn

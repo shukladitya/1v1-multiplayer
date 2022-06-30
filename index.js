@@ -388,8 +388,6 @@ let setMessage = (messageString) => {
   message.innerText = messageString;
 };
 
-timer();
-
 ///restart button
 restartBtn = document.querySelector(".restartBtn");
 restartBtn.addEventListener("click", () => {

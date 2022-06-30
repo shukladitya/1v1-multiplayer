@@ -1,4 +1,4 @@
-socket = io("http://localhost:3500/");
+socket = io("https://challenge-1v1.herokuapp.com/");
 
 addNotification = (notificationText) => {
   document.querySelector(".notification p").innerText = notificationText;
