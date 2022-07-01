@@ -88,11 +88,11 @@ class Human {
     this.locationX = locationX;
     this.locationY = locationY;
     this.velocityY = 0; //initial velocity freefall
-    this.width = innerHeight / 3;
+    this.width = innerWidth / 7;
     this.height = innerHeight / 2.7;
     this.attackBoxX = this.locationX;
     this.attackBoxY = this.locationY;
-    this.attackBoxWidth = innerHeight / 1.55;
+    this.attackBoxWidth = innerWidth / 3.3;
     this.attackBoxHeight = innerHeight / 6.5;
     this.applyAttackInset = false;
     this.attackInset = (innerHeight * 6.3) / 20;
@@ -128,7 +128,7 @@ class Human {
 
   draw = () => {
     // .....bodybox below......
-    //c.fillRect(this.locationX, this.locationY, this.width, this.height);
+    // c.fillRect(this.locationX, this.locationY, this.width, this.height);
     c.drawImage(
       this.image,
       (this.currentFrameNumber % this.frames) *
@@ -340,12 +340,27 @@ let animate = () => {
     player.initiateDeath();
     clearTimeout(a);
     setMessage(`${acceptersName} Won.`);
+    createHistory(
+      acceptersName,
+      enemy.spriteNumber,
+      userName,
+      player.spriteNumber
+    );
+    historyFlag = true;
+
     restartBtn.style.display = "block";
   }
   if (enemy.health == 0) {
     enemy.initiateDeath();
     clearTimeout(a);
     setMessage(`${userName} Won.`);
+    createHistory(
+      userName,
+      player.spriteNumber,
+      acceptersName,
+      enemy.spriteNumber
+    );
+    historyFlag = true;
     restartBtn.style.display = "block";
   }
 };
@@ -378,9 +393,25 @@ let timer = () => {
     gameTimer.innerText = time;
     if (time == 0) {
       clearTimeout(a);
-      if (enemy.health < player.health) setMessage("Player 1 won.");
-      else if (enemy.health > player.health) setMessage("player 2 won.");
-      else setMessage("tie");
+      if (enemy.health < player.health) {
+        setMessage(`${userName} won.`);
+        createHistory(
+          userName,
+          player.spriteNumber,
+          acceptersName,
+          enemy.spriteNumber
+        );
+        historyFlag = true;
+      } else if (enemy.health > player.health) {
+        setMessage(`${acceptersName} won.`);
+        createHistory(
+          acceptersName,
+          enemy.spriteNumber,
+          userName,
+          player.spriteNumber
+        );
+        historyFlag = true;
+      } else setMessage("tie");
       restartBtn.style.display = "block";
     }
   }, 1000);
@@ -395,6 +426,7 @@ let setMessage = (messageString) => {
 restartBtn = document.querySelector(".restartBtn");
 restartBtn.addEventListener("click", () => {
   restart(player.spriteNumber, enemy.spriteNumber);
+  historyFlag = false;
   restartBtn.style.display = "none";
   socket.emit("gameRestarted");
 });

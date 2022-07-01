@@ -35,6 +35,16 @@
         box-sizing: border-box;
         font-family: "Press Start 2P", cursive;
       }
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      *::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      * {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
       .scaffold {
         position: relative;
         background-color: #ce1d39;
@@ -318,6 +328,69 @@
         font-size: 2rem;
         margin-left: 2rem;
       }
+      .history {
+        display: none;
+        background-color: #810955;
+        padding: 2rem 4rem;
+        border-radius: 2rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .searchBar {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #historySearch {
+        height: 2rem;
+        background-color: #571d42;
+        border: none;
+        color: white;
+        border-radius: 2rem;
+        padding: 1.5rem 2rem;
+      }
+      #historySearch:focus,
+      #historySearch:focus {
+        outline: none;
+      }
+      .searchBar ion-icon {
+        font-size: 3rem;
+        cursor: pointer;
+        margin-left: 1rem;
+      }
+      .historyListElement {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .playerInfoHistory {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .winningInfo img {
+        width: 6rem;
+        margin-right: 3rem;
+      }
+      .loosingInfo img {
+        margin-left: 3rem;
+        width: 6rem;
+      }
+      .historyList {
+        height: 9rem;
+        overflow: scroll;
+      }
+      .vs {
+        margin: 0 5rem;
+      }
+      .historyBackBtn {
+        background-color: #ce1d39;
+        padding: 1rem 4rem;
+        margin-top: 2rem;
+        border-radius: 5rem;
+      }
     </style>
     <div class="scaffold">
       <div class="healthBars">
@@ -392,6 +465,37 @@
           </div>
           <div class="submitBtn">Submit</div>
         </div>
+        <div class="history">
+          <p>History</p>
+          <span class="searchBar"
+            ><input
+              type="text"
+              id="historySearch"
+              placeholder="Enter username" /><ion-icon
+              name="search-outline"
+            ></ion-icon
+          ></span>
+          <div class="historyList">
+            <div class="historyListElement">
+              <div class="playerInfoHistory winningInfo">
+                <img src="assets/menu/p1.JPG" />
+                <div>
+                  <p>Win</p>
+                  <p>Aditya</p>
+                </div>
+              </div>
+              <span class="vs">VS</span>
+              <div class="playerInfoHistory loosingInfo">
+                <div>
+                  <p>Win</p>
+                  <p>Aditya</p>
+                </div>
+                <img src="assets/menu/p2.JPG" />
+              </div>
+            </div>
+          </div>
+          <span class="historyBackBtn">Back</span>
+        </div>
       </div>
       <div class="notification">
         <p></p>
@@ -399,6 +503,7 @@
       <div class="restartBtn">
         <p>Restart <ion-icon name="refresh"></ion-icon></p>
       </div>
+
       <div hidden>
         <img src="assets/player1l/attack1.png" alt="" srcset="" />
         <img src="assets/player1l/attack2.png" alt="" srcset="" />
@@ -481,5 +586,6 @@
     <script src="networking.js"></script>
     <script src="menuName.js"></script>
     <script src="menu.js"></script>
+    <script src="highScore.js"></script>
   </body>
 </html>
