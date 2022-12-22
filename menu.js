@@ -76,7 +76,7 @@ availabeFighters.forEach((element) => {
 });
 
 //creating the shareable link
-host = "https://challenge-1v1.herokuapp.com";
+host = "https://onev1-backend.onrender.com";
 link = document.querySelector(".link");
 link.innerText = `${host}/${userName}`;
 //creating copy btn

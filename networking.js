@@ -1,4 +1,4 @@
-socket = io("https://challenge-1v1.herokuapp.com/");
+socket = io("https://onev1-backend.onrender.com/");
 
 addNotification = (notificationText) => {
   document.querySelector(".notification p").innerText = notificationText;
